@@ -4,7 +4,7 @@ import * as React from "react";
 import { useTheme } from "next-themes";
 import { Half2Icon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import clsx from "clsx";
-import { Button } from "../common/button";
+import { Button } from "./common/button";
 
 export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();

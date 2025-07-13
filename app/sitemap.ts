@@ -1,7 +1,8 @@
-import { siteUrl } from "../lib/constants";
 import type { MetadataRoute } from "next";
 
 export const revalidate = 1800; // 30 minutes - adjust as needed
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://refoodify.netlify.app';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static routes for Refoodify
@@ -11,6 +12,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "daily" as const,
       priority: 1.0,
+    },
+    {
+      url: `${siteUrl}/about`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
     },
     {
       url: `${siteUrl}/dashboard`,
