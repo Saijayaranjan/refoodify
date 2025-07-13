@@ -181,9 +181,9 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gray-900 relative overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-green-900/20 via-gray-900 to-blue-900/20" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900 to-green-900/10" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-green-400/5 rounded-full blur-3xl" />
 
       <div className="relative z-10 p-6">
         {/* Header */}
@@ -196,37 +196,37 @@ export default function DashboardPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-gradient-to-br from-green-600 to-green-700 p-6 rounded-2xl text-white">
+          <div className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 p-6 rounded-2xl text-white hover:border-green-500/30 transition-colors">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-green-100 text-sm font-medium">Total Points</h3>
-                <p className="text-3xl font-bold">{userStats?.total_points.toLocaleString() || 0}</p>
+                <h3 className="text-gray-400 text-sm font-medium">Total Points</h3>
+                <p className="text-3xl font-bold text-green-400">{userStats?.total_points.toLocaleString() || 0}</p>
               </div>
-              <div className="p-3 bg-green-500/30 rounded-full">
+              <div className="p-3 bg-green-500/20 rounded-full">
                 <span className="text-2xl">🌟</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-blue-600 to-blue-700 p-6 rounded-2xl text-white">
+          <div className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 p-6 rounded-2xl text-white hover:border-green-500/30 transition-colors">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-blue-100 text-sm font-medium">Items Saved</h3>
-                <p className="text-3xl font-bold">{userStats?.items_saved || 0}</p>
+                <h3 className="text-gray-400 text-sm font-medium">Items Saved</h3>
+                <p className="text-3xl font-bold text-white">{userStats?.items_saved || 0}</p>
               </div>
-              <div className="p-3 bg-blue-500/30 rounded-full">
+              <div className="p-3 bg-green-500/20 rounded-full">
                 <span className="text-2xl">🍃</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-purple-600 to-purple-700 p-6 rounded-2xl text-white">
+          <div className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 p-6 rounded-2xl text-white hover:border-green-500/30 transition-colors">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-purple-100 text-sm font-medium">Global Rank</h3>
-                <p className="text-3xl font-bold">{rank}</p>
+                <h3 className="text-gray-400 text-sm font-medium">Global Rank</h3>
+                <p className="text-3xl font-bold text-white">{rank}</p>
               </div>
-              <div className="p-3 bg-purple-500/30 rounded-full">
+              <div className="p-3 bg-green-500/20 rounded-full">
                 <span className="text-2xl">🏆</span>
               </div>
             </div>
@@ -237,7 +237,7 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Food Items */}
           <div className="lg:col-span-2">
-            <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6">
+            <div className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold text-white">Your Food Items</h2>
                 <button 
@@ -251,7 +251,7 @@ export default function DashboardPage() {
               <div className="space-y-4 max-h-96 overflow-y-auto">
                 {foodItems.length === 0 ? (
                   <div className="text-center py-12">
-                    <div className="bg-gray-700/30 rounded-2xl p-8 border border-gray-600/30">
+                    <div className="bg-gray-800/30 rounded-2xl p-8 border border-gray-600/30">
                       <span className="text-8xl mb-6 block">🍽️</span>
                       <h3 className="text-white text-xl font-semibold mb-2">No food items yet</h3>
                       <p className="text-gray-400 text-lg mb-4">Start your food waste reduction journey!</p>
@@ -266,7 +266,7 @@ export default function DashboardPage() {
                   </div>
                 ) : (
                   foodItems.map((item) => (
-                    <div key={item.id} className="bg-gray-700/50 p-4 rounded-lg border border-gray-600/50 hover:border-gray-500/50 transition-colors">
+                    <div key={item.id} className="bg-gray-800/30 p-4 rounded-lg border border-gray-600/30 hover:border-green-500/40 transition-colors">
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
                           <h3 className="text-white font-medium text-lg">{item.name}</h3>
@@ -277,7 +277,7 @@ export default function DashboardPage() {
                           <div className="flex gap-2 mt-3">
                             <button 
                               onClick={() => getAISuggestion(item.name)}
-                              className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded text-sm transition-colors flex items-center gap-1"
+                              className="px-3 py-1 bg-green-600 hover:bg-green-700 text-white rounded text-sm transition-colors flex items-center gap-1"
                             >
                               🤖 Get AI Tips
                             </button>
@@ -294,7 +294,7 @@ export default function DashboardPage() {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Quick Actions */}
-            <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6">
+            <div className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6">
               <h3 className="text-xl font-bold text-white mb-4">Quick Actions</h3>
               <div className="space-y-3">
                 <button 
@@ -303,26 +303,26 @@ export default function DashboardPage() {
                 >
                   🍃 Add Food Item
                 </button>
-                <button className="w-full p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-left">
+                <button className="w-full p-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors text-left">
                   🧑‍🍳 Browse Recipes
                 </button>
-                <button className="w-full p-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors text-left">
+                <button className="w-full p-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors text-left">
                   📊 View Leaderboard
                 </button>
               </div>
             </div>
 
             {/* Progress to Next Level */}
-            <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6">
+            <div className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6">
               <h3 className="text-xl font-bold text-white mb-4">Progress to Next Level</h3>
               <div className="space-y-4">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-400">Current Level</span>
                   <span className="text-white font-medium">Level {Math.floor((userStats?.total_points || 0) / 1000) + 1}</span>
                 </div>
-                <div className="w-full bg-gray-700 rounded-full h-3">
+                <div className="w-full bg-gray-700/50 rounded-full h-3">
                   <div 
-                    className="bg-gradient-to-r from-green-500 to-blue-500 h-3 rounded-full transition-all duration-500"
+                    className="bg-gradient-to-r from-green-500 to-green-400 h-3 rounded-full transition-all duration-500"
                     style={{ width: `${progressToNext}%` }}
                   ></div>
                 </div>
@@ -338,28 +338,28 @@ export default function DashboardPage() {
 
       {/* Add Food Item Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-800 rounded-2xl p-6 w-full max-w-md border border-gray-700">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 w-full max-w-md border border-gray-700/50">
             <h3 className="text-xl font-bold text-white mb-4">Add Food Item</h3>
             <input
               type="text"
               value={newFoodItem}
               onChange={(e) => setNewFoodItem(e.target.value)}
               placeholder="e.g., banana peel, leftover rice..."
-              className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 mb-4 focus:outline-none focus:border-green-500"
+              className="w-full p-3 bg-gray-700/50 border border-gray-600/50 rounded-lg text-white placeholder-gray-400 mb-4 focus:outline-none focus:border-green-500 focus:bg-gray-700"
               onKeyPress={(e) => e.key === 'Enter' && handleAddFoodItem()}
             />
             <div className="flex gap-3">
               <button 
                 onClick={() => setShowAddModal(false)}
-                className="flex-1 p-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors"
+                className="flex-1 p-3 bg-gray-700/50 hover:bg-gray-600/50 text-white rounded-lg transition-colors border border-gray-600/30"
               >
                 Cancel
               </button>
               <button 
                 onClick={handleAddFoodItem}
                 disabled={!newFoodItem.trim()}
-                className="flex-1 p-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
+                className="flex-1 p-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-600/50 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
               >
                 Add Item
               </button>
@@ -370,8 +370,8 @@ export default function DashboardPage() {
 
       {/* AI Suggestion Modal */}
       {(showAISuggestion || isAILoading) && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-800 rounded-2xl p-6 w-full max-w-4xl border border-gray-700 max-h-[80vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 w-full max-w-4xl border border-gray-700/50 max-h-[80vh] overflow-y-auto">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-2xl font-bold text-white flex items-center gap-2">
                 <span className="text-2xl">🤖</span>
