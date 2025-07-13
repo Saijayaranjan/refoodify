@@ -188,8 +188,6 @@ Thanks to all the amazing people who have contributed to this project:
   <img src="https://contrib.rocks/image?repo=Saijayaranjan/refoodify" />
 </a>
 
-Made with [contrib.rocks](https://contrib.rocks).
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
