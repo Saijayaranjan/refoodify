@@ -20,7 +20,7 @@ function SimpleFooter() {
           </nav>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-700 text-center text-sm text-gray-400">
-          © 2025 Refoodify by Team "Git Happens". All rights reserved. Make money with waste.
+          © 2025 Refoodify by Team "Git Happens". All rights reserved.
         </div>
       </div>
     </footer>
