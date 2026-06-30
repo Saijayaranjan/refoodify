@@ -57,15 +57,15 @@ export function HeaderWrapper() {
       <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-background/80 backdrop-blur-md">
         <div className="container mx-auto flex h-16 items-center justify-between px-6">
           <Logo />
-          <nav className="hidden md:flex items-center space-x-8">
-            <a href="/" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Home</a>
-            <a href="/about" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">About</a>
-            <span className="text-sm font-medium text-muted-foreground/50 cursor-not-allowed relative">
-              Leaderboard
-              <span className="absolute -top-2 -right-3 text-[10px] bg-primary/20 text-primary border border-primary/30 px-1 rounded-sm uppercase tracking-wider">Soon</span>
-            </span>
-            <a href="/how-it-works" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">How It Works</a>
-          </nav>
+          <nav className="flex items-center space-x-4 md:space-x-8">
+          <a href="/" className="text-xs md:text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Home</a>
+          <a href="/about" className="text-xs md:text-sm font-medium text-muted-foreground hover:text-primary transition-colors">About</a>
+          <span className="text-xs md:text-sm font-medium text-muted-foreground/50 cursor-not-allowed relative hidden sm:block">
+            Leaderboard
+            <span className="absolute -top-2 -right-3 text-[10px] bg-primary/20 text-primary border border-primary/30 px-1 rounded-sm uppercase tracking-wider">Soon</span>
+          </span>
+          <a href="/how-it-works" className="text-xs md:text-sm font-medium text-muted-foreground hover:text-primary transition-colors hidden sm:block">How It Works</a>
+        </nav>
           <div className="flex items-center space-x-4">
             {user && (
               <DropdownMenu.Root>
@@ -123,11 +123,11 @@ export function HeaderWrapper() {
     <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-background/80 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Logo />
-        <nav className="hidden md:flex items-center space-x-8">
-          <a href="/#features" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Features</a>
-          <a href="/about" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">About</a>
-          <a href="/how-it-works" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">How It Works</a>
-          <span className="text-sm font-medium text-muted-foreground/50 cursor-not-allowed relative">
+        <nav className="flex items-center space-x-4 md:space-x-8">
+          <a href="/#features" className="text-xs md:text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Features</a>
+          <a href="/about" className="text-xs md:text-sm font-medium text-muted-foreground hover:text-primary transition-colors">About</a>
+          <a href="/how-it-works" className="text-xs md:text-sm font-medium text-muted-foreground hover:text-primary transition-colors hidden sm:block">How It Works</a>
+          <span className="text-xs md:text-sm font-medium text-muted-foreground/50 cursor-not-allowed relative hidden sm:block">
             Leaderboard
             <span className="absolute -top-2 -right-3 text-[10px] bg-primary/20 text-primary border border-primary/30 px-1 rounded-sm uppercase tracking-wider">Soon</span>
           </span>
