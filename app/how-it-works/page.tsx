@@ -1,191 +1,160 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Camera, Brain, Trophy, Coins, ArrowRight, PlayCircle } from "lucide-react";
+import Link from "next/link";
+
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+};
+
+const steps = [
+  {
+    num: "01",
+    title: "Capture Your Leftovers",
+    description: "Simply take a photo of your food waste or input details manually. Our AI instantly recognizes ingredients, nutritional content, and suggests optimal disposal methods. Upload from your phone, tablet, or desktop - anywhere, anytime.",
+    icon: Camera,
+    features: ["Smart image recognition technology", "Automatic nutritional analysis", "Manual input option available"]
+  },
+  {
+    num: "02",
+    title: "AI-Powered Recommendations",
+    description: "Our advanced machine learning analyzes your waste patterns, nutritional data, and local resources to generate personalized suggestions. Get recipes for leftovers, composting guides, donation locations, and even marketplace opportunities where you can sell valuable waste streams.",
+    icon: Brain,
+    features: ["Personalized reuse suggestions", "Creative recipe recommendations", "Optimal composting guidance"]
+  },
+  {
+    num: "03",
+    title: "Implement Solutions",
+    description: "Follow our detailed implementation guides to transform waste into value. Cook creative leftover recipes, start efficient compost systems, connect with local food banks, or list valuable materials on our integrated marketplace. Every action is tracked and rewarded.",
+    icon: Trophy,
+    features: ["Detailed implementation guides", "Video tutorials available", "Community support network"]
+  },
+  {
+    num: "04",
+    title: "Get Rewarded",
+    description: "Earn points for every sustainable action, compete globally on leaderboards, unlock achievement badges, and receive monetary rewards through weekly rewards. Convert your environmental impact into tangible rewards and cash payments.",
+    icon: Coins,
+    features: ["Points for sustainable actions", "Leaderboard competitions", "Monetary rewards through weekly payouts"]
+  }
+];
+
 export default function HowItWorksPage() {
   return (
-    <div className="relative min-h-screen bg-gray-900 text-white pt-20">
+    <div className="min-h-screen bg-background text-foreground pt-24 pb-16 overflow-hidden">
       {/* Hero Section */}
-      <section className="py-24 px-4 relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900 to-green-900/20"></div>
-        <div className="container mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-green-500/10 border border-green-500/20 rounded-full">
-            <span className="text-green-400 text-sm font-medium">🔄 Process</span>
-          </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            How Refoodify Works
-          </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Turn your food waste into money and environmental impact with our revolutionary AI-powered platform.
-          </p>
+      <section className="px-4 relative mb-32">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none -z-10"></div>
+        <div className="container mx-auto max-w-4xl text-center relative z-10">
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="space-y-6"
+          >
+            <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-4 py-1.5 mb-2 bg-primary/10 border border-primary/20 rounded-full">
+              <span className="text-primary text-xs font-mono tracking-wide uppercase font-semibold">The Process</span>
+            </motion.div>
+            <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-bold tracking-tighter">
+              How Refoodify Works
+            </motion.h1>
+            <motion.p variants={fadeIn} className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto font-serif leading-relaxed">
+              Turn your food waste into money and environmental impact with our revolutionary AI-powered platform.
+            </motion.p>
+          </motion.div>
         </div>
       </section>
 
       {/* Steps Section */}
-      <section className="py-24 px-4">
-        <div className="container mx-auto">
-          <div className="grid gap-16">
-            
-            {/* Step 1 */}
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-3xl blur-2xl"></div>
-                <div className="relative bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-3xl p-8 h-80 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">📱</div>
-                    <div className="text-2xl font-bold text-green-400">Upload Food Waste</div>
-                  </div>
+      <section className="py-12 px-4">
+        <div className="container mx-auto max-w-5xl">
+          <div className="space-y-32">
+            {steps.map((step, index) => {
+              const isEven = index % 2 === 1;
+              return (
+                <div key={index} className="grid md:grid-cols-2 gap-12 md:gap-24 items-center">
+                  <motion.div 
+                    initial={{ opacity: 0, x: isEven ? 40 : -40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
+                    className={isEven ? "md:order-2" : ""}
+                  >
+                    <div className="relative aspect-square md:aspect-[4/3] w-full">
+                      <div className="absolute inset-0 bg-primary/10 rounded-3xl blur-3xl -z-10 transform scale-95"></div>
+                      <div className="absolute inset-0 bg-card/30 backdrop-blur-xl border border-white/5 rounded-3xl flex items-center justify-center p-8 group hover:border-primary/30 transition-all duration-500 hover:bg-card/40 shadow-2xl">
+                        <div className="text-center transform transition-transform duration-500 group-hover:scale-110">
+                          <step.icon className="w-24 h-24 text-primary mx-auto mb-6 opacity-80 group-hover:opacity-100 drop-shadow-[0_0_15px_rgba(212,255,51,0.3)]" />
+                          <div className="text-2xl font-bold text-foreground font-serif tracking-tight">{step.title}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                  
+                  <motion.div 
+                    initial={{ opacity: 0, x: isEven ? -40 : 40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
+                    className={isEven ? "md:order-1" : ""}
+                  >
+                    <div className="text-primary text-6xl md:text-8xl font-bold font-serif opacity-20 mb-4 tracking-tighter leading-none -ml-1.5">{step.num}</div>
+                    <h3 className="text-3xl font-bold mb-6 text-foreground tracking-tight">{step.title}</h3>
+                    <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                      {step.description}
+                    </p>
+                    <ul className="space-y-4 text-muted-foreground">
+                      {step.features.map((feature, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2.5 flex-shrink-0 shadow-[0_0_8px_rgba(212,255,51,0.8)]"></div>
+                          <span className="leading-relaxed">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
                 </div>
-              </div>
-              <div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 mb-4 bg-green-500/10 border border-green-500/20 rounded-full">
-                  <span className="text-green-400 text-sm font-medium">Step 1</span>
-                </div>
-                <h3 className="text-3xl font-bold mb-6 text-white">Capture Your Leftovers</h3>
-                <p className="text-xl text-gray-300 mb-6 leading-relaxed">
-                  Simply take a photo of your food waste or input details manually. Our AI instantly recognizes ingredients, nutritional content, and suggests optimal disposal methods. Upload from your phone, tablet, or desktop - anywhere, anytime.
-                </p>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span>Smart image recognition technology</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span>Automatic nutritional analysis</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span>Manual input option available</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="md:order-2 relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur-2xl"></div>
-                <div className="relative bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-3xl p-8 h-80 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">🤖</div>
-                    <div className="text-2xl font-bold text-blue-400">AI Analysis</div>
-                  </div>
-                </div>
-              </div>
-              <div className="md:order-1">
-                <div className="inline-flex items-center gap-2 px-4 py-2 mb-4 bg-blue-500/10 border border-blue-500/20 rounded-full">
-                  <span className="text-blue-400 text-sm font-medium">Step 2</span>
-                </div>
-                <h3 className="text-3xl font-bold mb-6 text-white">AI-Powered Recommendations</h3>
-                <p className="text-xl text-gray-300 mb-6 leading-relaxed">
-                  Our advanced machine learning analyzes your waste patterns, nutritional data, and local resources to generate personalized suggestions. Get recipes for leftovers, composting guides, donation locations, and even marketplace opportunities where you can sell valuable waste streams.
-                </p>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <span>Personalized reuse suggestions</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <span>Creative recipe recommendations</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <span>Optimal composting guidance</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-3xl blur-2xl"></div>
-                <div className="relative bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-3xl p-8 h-80 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">🎯</div>
-                    <div className="text-2xl font-bold text-purple-400">Take Action</div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 mb-4 bg-purple-500/10 border border-purple-500/20 rounded-full">
-                  <span className="text-purple-400 text-sm font-medium">Step 3</span>
-                </div>
-                <h3 className="text-3xl font-bold mb-6 text-white">Implement Solutions</h3>
-                <p className="text-xl text-gray-300 mb-6 leading-relaxed">
-                  Follow our detailed implementation guides to transform waste into value. Cook creative leftover recipes, start efficient compost systems, connect with local food banks, or list valuable materials on our integrated marketplace. Every action is tracked and rewarded.
-                </p>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                    <span>Detailed implementation guides</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                    <span>Video tutorials available</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                    <span>Community support network</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="md:order-2 relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-3xl blur-2xl"></div>
-                <div className="relative bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-3xl p-8 h-80 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">🏆</div>
-                    <div className="text-2xl font-bold text-yellow-400">Earn Rewards</div>
-                  </div>
-                </div>
-              </div>
-              <div className="md:order-1">
-                <div className="inline-flex items-center gap-2 px-4 py-2 mb-4 bg-yellow-500/10 border border-yellow-500/20 rounded-full">
-                  <span className="text-yellow-400 text-sm font-medium">Step 4</span>
-                </div>
-                <h3 className="text-3xl font-bold mb-6 text-white">Get Rewarded</h3>
-                <p className="text-xl text-gray-300 mb-6 leading-relaxed">
-                  Earn points for every sustainable action, compete globally on leaderboards, unlock achievement badges, and receive monetary rewards through weekly rewards. Convert your environmental impact into tangible rewards and cash payments.
-                </p>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                    <span>Points for sustainable actions</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                    <span>Leaderboard competitions</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                    <span>Monetary rewards through weekly rewards</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-4 relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-emerald-500/10"></div>
-        <div className="container mx-auto text-center relative z-10">
-          <h2 className="text-4xl font-bold mb-6 text-white">Ready to Turn Waste into Wealth?</h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Start your sustainable journey today and see real results within your first week.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/dashboard" className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl text-white font-semibold text-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-green-500/25 hover:scale-105 text-center">
-              Start Earning Today
-            </a>
-            <a href="#" className="px-8 py-4 border border-gray-600 rounded-xl text-white font-semibold text-lg hover:border-gray-500 hover:bg-gray-800/50 transition-all duration-300 text-center">
-              Watch Demo Video
-            </a>
-          </div>
+      <section className="py-32 px-4 relative mt-24 border-t border-white/5">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_center,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none -z-10"></div>
+        <div className="container mx-auto text-center relative z-10 max-w-3xl">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.h2 variants={fadeIn} className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Ready to Turn Waste into Wealth?</motion.h2>
+            <motion.p variants={fadeIn} className="text-xl text-muted-foreground mb-10 font-serif leading-relaxed">
+              Start your sustainable journey today and see real results within your first week.
+            </motion.p>
+            <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/dashboard" className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-semibold text-sm uppercase tracking-wider hover:bg-primary/90 transition-all rounded-sm gap-2">
+                Start Earning Today
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link href="#" className="inline-flex items-center justify-center px-8 py-4 border border-white/10 text-foreground font-semibold text-sm uppercase tracking-wider hover:bg-white/5 transition-all rounded-sm gap-2">
+                Watch Demo Video
+                <PlayCircle className="w-4 h-4 text-primary" />
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </div>

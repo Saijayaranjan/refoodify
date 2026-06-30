@@ -4,6 +4,9 @@ import { useState, useEffect, Suspense } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/auth-provider";
+import { motion } from "framer-motion";
+import { Leaf, CircleAlert, CircleCheck, Loader2, ArrowRight, ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 function LoginContent() {
   const [email, setEmail] = useState("");
@@ -86,37 +89,51 @@ function LoginContent() {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center px-4">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900 to-green-900/20"></div>
-      <div className="absolute top-20 left-20 w-16 h-16 bg-green-500/10 rounded-full blur-xl animate-pulse"></div>
-      <div className="absolute top-40 right-32 w-20 h-20 bg-emerald-500/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
-      <div className="absolute bottom-32 left-1/3 w-12 h-12 bg-green-400/15 rounded-full blur-lg animate-pulse delay-500"></div>
+  const isError = message.toLowerCase().includes("error") || message.toLowerCase().includes("invalid");
 
-      <div className="relative z-10 w-full max-w-md">
+  return (
+    <div className="min-h-screen bg-background text-foreground flex items-center justify-center px-4 relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none -z-10"></div>
+      <div className="absolute top-20 left-20 w-32 h-32 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute bottom-20 right-20 w-48 h-48 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+
+      {/* Back Button Header */}
+      <Link href="/" className="fixed top-8 left-8 md:top-10 md:left-10 text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-2 text-sm font-medium z-50 bg-background/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/5">
+        <ArrowLeft className="w-4 h-4" />
+        Back to Home
+      </Link>
+
+      <motion.div 
+        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="relative z-10 w-full max-w-md"
+      >
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <span className="text-3xl">🍃</span>
-            <span className="font-bold text-2xl text-green-500">Refoodify</span>
-          </div>
-          <h1 className="text-3xl font-bold mb-2">
+          <Link href="/" className="inline-flex items-center justify-center space-x-2 mb-6 group">
+            <div className="p-2 rounded-xl bg-card border border-white/10 group-hover:border-primary/50 transition-colors">
+              <Leaf className="w-6 h-6 text-primary" />
+            </div>
+            <span className="font-bold text-2xl tracking-tight text-foreground group-hover:text-primary transition-colors">Refoodify</span>
+          </Link>
+          <h1 className="text-3xl md:text-4xl font-bold mb-3 tracking-tight font-serif">
             {isLogin ? "Welcome Back" : "Join Refoodify"}
           </h1>
-          <p className="text-gray-400">
+          <p className="text-muted-foreground">
             {isLogin 
               ? "Sign in to continue reducing food waste" 
-              : "Start your journey to make money with waste"
+              : "Start your journey to turn waste into impact"
             }
           </p>
         </div>
 
         {/* Auth Form */}
-        <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8">
-          <form onSubmit={handleAuth} className="space-y-6">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+        <div className="bg-card/40 backdrop-blur-2xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+          <form onSubmit={handleAuth} className="space-y-5">
+            <div className="space-y-1.5">
+              <label htmlFor="email" className="block text-sm font-medium text-foreground/80">
                 Email Address
               </label>
               <input
@@ -124,14 +141,14 @@ function LoginContent() {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                placeholder="Enter your email"
+                className="w-full px-4 py-3 bg-background/50 border border-white/10 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
+                placeholder="name@example.com"
                 required
               />
             </div>
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+            <div className="space-y-1.5">
+              <label htmlFor="password" className="block text-sm font-medium text-foreground/80">
                 Password
               </label>
               <input
@@ -139,52 +156,65 @@ function LoginContent() {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                placeholder="Enter your password"
+                className="w-full px-4 py-3 bg-background/50 border border-white/10 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
+                placeholder="••••••••"
                 required
                 minLength={6}
               />
             </div>
 
             {message && (
-              <div className={`text-sm p-3 rounded-lg flex items-center ${
-                message.includes("error") || message.includes("Error") 
-                  ? "bg-red-500/10 border border-red-500/20 text-red-400" 
-                  : "bg-green-500/10 border border-green-500/20 text-green-400"
+              <motion.div 
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                className={`text-sm p-4 rounded-lg flex items-start gap-3 border ${
+                isError
+                  ? "bg-red-500/10 border-red-500/20 text-red-400" 
+                  : "bg-primary/10 border-primary/20 text-primary"
               }`}>
-                {message}
-              </div>
+                {isError ? <CircleAlert className="w-5 h-5 flex-shrink-0" /> : <CircleCheck className="w-5 h-5 flex-shrink-0" />}
+                <p className="leading-relaxed pt-0.5">{message}</p>
+              </motion.div>
             )}
 
             <button
               type="submit"
               disabled={loading || redirecting}
-              className="w-full py-3 px-4 bg-green-600 hover:bg-green-700 disabled:bg-green-600/50 text-white font-medium rounded-lg transition-colors"
+              className="w-full h-12 flex items-center justify-center bg-primary text-primary-foreground font-semibold text-sm uppercase tracking-wider rounded-lg hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-4"
             >
               {redirecting ? (
-                "Redirecting..."
+                <span className="flex items-center gap-2">
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Redirecting...
+                </span>
               ) : loading ? (
-                "Loading..."
+                <span className="flex items-center gap-2">
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Processing...
+                </span>
               ) : (
-                isLogin ? "Sign In" : "Create Account"
+                <span className="flex items-center gap-2">
+                  {isLogin ? "Sign In" : "Create Account"}
+                  <ArrowRight className="w-4 h-4" />
+                </span>
               )}
             </button>
           </form>
 
           {/* Google Sign In */}
-          <div className="mt-6">
+          <div className="mt-8">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-600"></div>
+                <div className="w-full border-t border-white/10"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-gray-800 text-gray-400">Or continue with</span>
+                <span className="px-4 bg-card text-muted-foreground rounded-full text-xs uppercase tracking-wider font-medium">Or continue with</span>
               </div>
             </div>
 
             <button
               onClick={signInWithGoogle}
-              className="mt-4 w-full py-3 px-4 bg-white hover:bg-gray-50 text-gray-900 font-medium rounded-lg transition-colors flex items-center justify-center space-x-2 border border-gray-300"
+              className="mt-6 w-full h-12 bg-white hover:bg-gray-100 text-gray-900 font-medium text-sm rounded-lg transition-colors flex items-center justify-center space-x-3 border border-gray-200"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -197,13 +227,13 @@ function LoginContent() {
           </div>
 
           {/* Toggle Login/Signup */}
-          <div className="mt-6 text-center">
+          <div className="mt-8 text-center">
             <button
               onClick={() => {
                 setIsLogin(!isLogin);
                 setMessage("");
               }}
-              className="text-green-400 hover:text-green-300 text-sm"
+              className="text-muted-foreground hover:text-primary text-sm font-medium transition-colors"
             >
               {isLogin 
                 ? "Don't have an account? Sign up" 
@@ -212,28 +242,14 @@ function LoginContent() {
             </button>
           </div>
         </div>
-
-        {/* Back to Home */}
-        <div className="mt-6 text-center">
-          <a href="/" className="text-gray-400 hover:text-white text-sm">
-            ← Back to Home
-          </a>
-        </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-2 border-green-500 border-t-transparent mx-auto mb-3"></div>
-          <p className="text-white text-lg">Loading...</p>
-        </div>
-      </div>
-    }>
+    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>}>
       <LoginContent />
     </Suspense>
   );
